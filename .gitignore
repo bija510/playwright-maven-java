@@ -1,0 +1,6 @@
+*.png
+/target/
+/test-output/*
+debug.log*
+/.classpath
+/.project
