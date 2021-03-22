@@ -1,4 +1,4 @@
-package playwright;
+package playwrightJava;
 
 import org.testng.annotations.Test;
 import com.microsoft.playwright.*;

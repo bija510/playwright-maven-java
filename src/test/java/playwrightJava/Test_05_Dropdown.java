@@ -1,4 +1,4 @@
-package playwright;
+package playwrightJava;
 
 import java.util.List;
 import java.util.stream.Collectors;
