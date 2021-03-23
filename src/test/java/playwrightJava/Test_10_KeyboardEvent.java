@@ -1,10 +1,11 @@
 package playwrightJava;
 
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
@@ -15,47 +16,51 @@ public class Test_10_KeyboardEvent {
 	 * ArrowDown, End, Enter, Home, Insert, PageDown, PageUp, ArrowRight, ArrowUp,
 	 * etc.
 	 ******************************************************************************************************/
-	@Test()
-	public void test_keyboard_Enter() throws InterruptedException {
+
+	Page page;
+
+	@BeforeMethod
+	public void setUp() {
 		Browser browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
 		BrowserContext browserContext = browser.newContext();
-		Page page = browserContext.newPage();
-		page.navigate("https://letskodeit.teachable.com/pages/practice");
-		page.press("//a[normalize-space()='Open Tab']", "Enter");
+		page = browserContext.newPage();
+	}
 
-		page.pause();
+	@Test()
+	public void test_keyboard_Enter() throws InterruptedException {
+		page.navigate("https://letskodeit.teachable.com/pages/practice");
+		ElementHandle openNewTabBtn = page.querySelector("//a[normalize-space()='Open Tab']");
+		openNewTabBtn.press("Enter");
 	}
 
 	@Test
 	public void test_arrowAndMore() throws InterruptedException {
-		Browser browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-		BrowserContext browserContext = browser.newContext();
-		Page page = browserContext.newPage();
 		page.navigate("https://www.rahulshettyacademy.com/AutomationPractice/");
-		page.type("//input[@id='autocomplete']", "ind");
+		ElementHandle countryDynamixTxt = page.querySelector("//input[@id='autocomplete']");
+		countryDynamixTxt.fill("ind");
 		Thread.sleep(2000);
-		page.press("//input[@id='autocomplete']", "ArrowDown");
-		page.press("//input[@id='autocomplete']", "ArrowDown");
-		page.press("//input[@id='autocomplete']", "Enter");
+		countryDynamixTxt.press("ArrowDown");
+		countryDynamixTxt.press("ArrowDown");
+		countryDynamixTxt.press("Enter");
 
 		Thread.sleep(2000);
-		page.fill("//input[@id='autocomplete']", "ind");
-		page.press("//input[@id='autocomplete']", "Control+a");
+		countryDynamixTxt.fill("ind");
+		countryDynamixTxt.press("Control+a");
 		Thread.sleep(2000);
-		page.press("//input[@id='autocomplete']", "Backspace");
-		page.pause();
+		countryDynamixTxt.press("Backspace");
 	}
 
 	@Test
 	public void test_pageDown() throws InterruptedException {
-		Browser browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-		BrowserContext browserContext = browser.newContext();
-		Page page = browserContext.newPage();
 		page.navigate("https://letskodeit.teachable.com/pages/practice");
-		page.press("//h1[normalize-space()='Practice Page']", "PageDown");
+		ElementHandle registerLabel = page.querySelector("//h1[normalize-space()='Practice Page']");
+		registerLabel.press("PageDown");
 		Thread.sleep(2000);
-		page.press("//h1[normalize-space()='Practice Page']", "PageDown");
+		registerLabel.press("PageDown");
+	}
 
-		page.pause();
+	@AfterMethod
+	public void teraDown() {
+		//page.pause();
 	}
 }

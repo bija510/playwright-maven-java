@@ -1,12 +1,22 @@
 package playwrightJava;
 
-public class zTemp {
+import org.testng.annotations.Test;
 
-	public static void main(String[] args) {
-		String jsonFilePath = System.getProperty("user.dir")+ "\\Data\\TestData.json" ;
-		System.out.println(jsonFilePath);
-		
+import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserContext;
+import com.microsoft.playwright.BrowserType;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
 
+import base.BaseTest;
+
+public class zTemp extends BaseTest{
+
+	Page page;
+	@Test
+	public void test001() throws InterruptedException {
+		page.navigate("http://demo.automationtesting.in/Datepicker.html");
+		page.click("//button(kf)");
 	}
 
 }

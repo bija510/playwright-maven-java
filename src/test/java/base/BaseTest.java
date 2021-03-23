@@ -2,9 +2,12 @@ package base;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Properties;
 
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
 import com.microsoft.playwright.Browser;
@@ -13,6 +16,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
 import utilites.JsonUtils;
+import utilites.Utils;
 
 public class BaseTest {
 	protected static Browser browser;
@@ -75,11 +79,21 @@ public class BaseTest {
 			
 	}
 	
+	@AfterMethod
+	public void tearDownMethod(ITestResult result) {
+		String monthAndDate = Utils.getMonthAndDate();
+		String digit6TimeStamp = Utils.get6DigitTimeStamp();
+		String failScreenShotName = result.getMethod().getMethodName() + monthAndDate + "_Failed_" + digit6TimeStamp;
+		
+		if(ITestResult.FAILURE == result.getStatus()) {
+			String path = System.getProperty("user.dir") + "\\Screenshot\\"+ failScreenShotName +".png";
+			page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get(path)));
+		}
+	}
 	
 	@AfterClass
-	public static void tearDown() {
+	public static void tearDownClass() {
 		//page.pause();
-		//page.close();
-		
-	}
+		//page.close();	
+	}	
 }
