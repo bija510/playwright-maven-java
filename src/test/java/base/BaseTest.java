@@ -75,7 +75,7 @@ public class BaseTest {
 			}
 		}
 		
-		page.navigate(prop.getProperty("Url"));
+		//page.navigate(prop.getProperty("Url"));
 			
 	}
 	

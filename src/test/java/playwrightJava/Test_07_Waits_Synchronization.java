@@ -7,7 +7,7 @@ import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
-public class Test_07_Waits {
+public class Test_07_Waits_Synchronization {
 /****************************************************************************************
  * This By default auto wait for 30sec for element same to present for to do any action
  * as WebDriverWait (Explicit wait) in Selenium

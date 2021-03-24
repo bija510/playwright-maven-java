@@ -27,11 +27,14 @@ public class Test_04_ClickType_InnerTextGetAttribute {
 			 Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(50));
 			 Page page = browser.newPage();		
 			 page.navigate("https://www.rahulshettyacademy.com/AutomationPractice/");
-			 page.type("//input[@id='name']", "David");	
-			 Thread.sleep(4000);
-			 //NOT Working 3/20/2021
-			 System.out.println(page.getAttribute("//input[@id='name']", "value"));
 			 
-	     }
+			 page.type("//input[@id='name']", "David");	
+			 System.out.println(page.evalOnSelector("//input[@id='name']", "el => el.value"));// Work 100%
+			 
+			 //System.out.println(page.getAttribute("//input[@id='name']", "value")); //NOT Working 3/20/2021
+			 	 		
+			 page.pause();
+
+				}			 
+	      }
 	}
-}

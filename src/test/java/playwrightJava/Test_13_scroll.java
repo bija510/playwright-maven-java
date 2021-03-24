@@ -19,7 +19,8 @@ public class Test_13_scroll {
 		page.press("//h1[normalize-space()='Practice Page']", "PageDown");
 		Thread.sleep(2000);
 		page.press("//h1[normalize-space()='Practice Page']", "PageDown");
-
+		//******************Using javaScript************************
+		page.evaluate("window.scrollTo(0,2000)");
 		page.pause();
 	}	
 }
