@@ -1,11 +1,7 @@
 package playwrightJava;
 
-import java.util.Arrays;
-
 import org.testng.annotations.Test;
-
 import com.microsoft.playwright.ElementHandle;
-
 import base.BaseTest;
 
 public class Test_15_newTab extends BaseTest{

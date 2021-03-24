@@ -1,11 +1,9 @@
 package playwrightJava;
 
 import org.testng.annotations.Test;
-
 import base.BaseTest;
 
-public class Test_17_WindowAuthentication extends BaseTest{
-
+public class Test_18_WindowAuthentication extends BaseTest{
 
 	@Test
 	public void test001() throws InterruptedException {
