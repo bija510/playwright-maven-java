@@ -1,6 +1,9 @@
 package playwrightJava;
 
 import java.awt.AWTException;
+import java.nio.file.Paths;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
@@ -15,18 +18,35 @@ public class Test_11_FileUploadRobotClass {
  * Robot class can be used in selenium as well as playwright 
  * since it is pure Java so it's all good
  **********************************************************/
-	@Test()
-	public void test_fileUpload() throws InterruptedException, AWTException {
+	Page page;
+	
+	@BeforeClass
+	public void setUp() {
 		Browser browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
 		BrowserContext browserContext = browser.newContext();
-		Page page = browserContext.newPage();
+		page = browserContext.newPage();
+	}
+	
+	@Test()
+	public void test_fileUpload() throws InterruptedException, AWTException {	
 		page.navigate("https://pdf2jpg.net/");
-		
 		String uploadFilePath = System.getProperty("user.dir")+"\\Data\\Upload file.pdf";
-		page.click("#advanced_pdf_file");
-		
+		page.click("#advanced_pdf_file");	
 		RobotUtils.fileUpload(uploadFilePath);
 		
 		page.pause();
+	}
+	
+	
+	@Test(description = "For this to work TagName should be <input")
+	public void test_fileUpload_Playwright() throws InterruptedException {
+		page.navigate("https://the-internet.herokuapp.com/upload");
+		// Select one file
+		String uploadFilePath = System.getProperty("user.dir")+"\\Data\\Upload file.pdf";
+		page.setInputFiles("//input[@id='file-upload']", Paths.get(uploadFilePath));
+
+		// Select multiple files
+		//page.setInputFiles("input#upload", new Path[] {Paths.get("file1.txt"), Paths.get("file2.txt")});
+		Thread.sleep(2000);
 	}
 }

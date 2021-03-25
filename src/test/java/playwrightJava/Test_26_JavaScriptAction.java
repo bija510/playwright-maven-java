@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import base.BaseTest;
 
-public class Test_16_JavaScriptAction extends BaseTest{
+public class Test_26_JavaScriptAction extends BaseTest{
 
 	@Test
 	public void test_byRemoving_targetAttribute_and_click() throws InterruptedException {
