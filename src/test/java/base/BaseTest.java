@@ -11,9 +11,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
 import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.options.BrowserChannel;
 
 import utilites.JsonUtils;
 import utilites.Utils;
@@ -23,6 +25,7 @@ public class BaseTest {
 	protected static Page page;
 	protected static Properties prop;
 	protected static JsonUtils data;
+	protected static BrowserContext browserContext;
 	
 	@BeforeClass
 	public static void setUp() throws IOException {
@@ -34,7 +37,7 @@ public class BaseTest {
   Reading Key value from config.properties file inside Configuration Folder
 ============================================================================*/
 		prop =new Properties();         
-		FileInputStream fis = new FileInputStream("../PlaywrightJava_Automation/Configurations/Config.properties");
+		FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/Configurations/Config.properties");
 		prop.load(fis);
 		String browserName = prop.getProperty("Browser");
 		String executionMode = prop.getProperty("ExecutionMode");
@@ -55,6 +58,19 @@ public class BaseTest {
 				browser = Playwright.create().webkit().launch(new BrowserType.LaunchOptions().setHeadless(false));
 				page = browser.newPage();
 			}
+			
+			else if(browserName.equalsIgnoreCase("CHROME")) {
+				browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel(BrowserChannel.CHROME));
+				browserContext = browser.newContext();
+				page = browserContext.newPage();
+				
+			}
+			else if(browserName.equalsIgnoreCase("MSEDGE")) {
+				browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel(BrowserChannel.MSEDGE));
+				browserContext = browser.newContext();
+				page = browserContext.newPage();
+				
+			}	
 		}
 		
 /*==============================
@@ -73,6 +89,18 @@ public class BaseTest {
 				browser = Playwright.create().webkit().launch();
 				page = browser.newPage();
 			}
+			else if(browserName.equalsIgnoreCase("CHROME")) {
+				browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setChannel(BrowserChannel.CHROME));
+				browserContext = browser.newContext();
+				page = browserContext.newPage();
+				
+			}
+			else if(browserName.equalsIgnoreCase("MSEDGE")) {
+				browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setChannel(BrowserChannel.MSEDGE));
+				browserContext = browser.newContext();
+				page = browserContext.newPage();
+				
+			}	
 		}
 		
 		//page.navigate(prop.getProperty("Url"));
@@ -93,7 +121,7 @@ public class BaseTest {
 	
 	@AfterClass
 	public static void tearDownClass() {
-		//page.pause();
+		page.pause();
 		//page.close();	
 	}	
 }

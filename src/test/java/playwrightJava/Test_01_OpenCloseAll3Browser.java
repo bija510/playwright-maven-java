@@ -2,6 +2,7 @@ package playwrightJava;
 
 import org.testng.annotations.Test;
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.BrowserChannel;
 
 /*****************************************************************************************************
 	1. We just Run the first & it automatically download chromium , Webkit, & firefox Browser
@@ -13,6 +14,36 @@ import com.microsoft.playwright.*;
 ******************************************************************************************************/
 public class Test_01_OpenCloseAll3Browser {
 
+	/** [--BrowserChannel--] Introduce in Version:-1.10 work Good
+	  CHROME,
+	  CHROME_BETA,
+	  CHROME_DEV,
+	  CHROME_CANARY,
+	  MSEDGE,
+	  MSEDGE_BETA,
+	  MSEDGE_DEV,
+	  MSEDGE_CANARY
+	 * @throws InterruptedException 
+	 */
+	@Test
+	public void test_CHROME_real_browser() throws InterruptedException {
+		Browser browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel(BrowserChannel.CHROME));
+		BrowserContext browserContext = browser.newContext();
+		Page page = browserContext.newPage();
+		page.navigate("https://www.rahulshettyacademy.com/AutomationPractice/");
+		Thread.sleep(10000);
+	}
+	
+
+	@Test
+	public void test_MSEDGE_real_browser() throws InterruptedException {
+		Browser browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel(BrowserChannel.MSEDGE));
+		BrowserContext browserContext = browser.newContext();
+		Page page = browserContext.newPage();
+		page.navigate("https://www.rahulshettyacademy.com/AutomationPractice/");
+		Thread.sleep(10000);
+	}
+	
 	@Test
 	public void test_Chromium_For_Chrome_And_Edge() {
 		 try (Playwright playwright = Playwright.create()) {

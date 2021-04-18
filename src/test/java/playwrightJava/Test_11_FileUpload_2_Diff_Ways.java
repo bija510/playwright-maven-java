@@ -13,7 +13,7 @@ import com.microsoft.playwright.Playwright;
 
 import utilites.RobotUtils;
 
-public class Test_11_FileUploadRobotClass {
+public class Test_11_FileUpload_2_Diff_Ways {
 /***********************************************************
  * Robot class can be used in selenium as well as playwright 
  * since it is pure Java so it's all good
@@ -28,7 +28,7 @@ public class Test_11_FileUploadRobotClass {
 	}
 	
 	@Test()
-	public void test_fileUpload() throws InterruptedException, AWTException {	
+	public void test_fileUpload_using_robotclass() throws InterruptedException, AWTException {	
 		page.navigate("https://pdf2jpg.net/");
 		String uploadFilePath = System.getProperty("user.dir")+"\\Data\\Upload file.pdf";
 		page.click("#advanced_pdf_file");	
@@ -39,7 +39,7 @@ public class Test_11_FileUploadRobotClass {
 	
 	
 	@Test(description = "For this to work TagName should be <input")
-	public void test_fileUpload_Playwright() throws InterruptedException {
+	public void test_fileUpload_using_playwright() throws InterruptedException {
 		page.navigate("https://the-internet.herokuapp.com/upload");
 		// Select one file
 		String uploadFilePath = System.getProperty("user.dir")+"\\Data\\Upload file.pdf";
