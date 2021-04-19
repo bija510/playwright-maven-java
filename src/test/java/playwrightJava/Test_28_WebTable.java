@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 import base.BaseTest;
 import utilites.WebTableUtils;
 
-public class Test_WebTable extends BaseTest{
+public class Test_28_WebTable extends BaseTest{
 
 	@Test
 	public void test_webTable() throws Exception {

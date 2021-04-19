@@ -1,0 +1,1 @@
+1. [CLI-Record-Test.bat] To Open the url to Record test case ==> R-click==>open with System Editor
