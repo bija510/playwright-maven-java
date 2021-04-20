@@ -7,10 +7,11 @@ import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.*;
 
 public class Test_10_KeyboardEvent {
 	/******************************************************************************************************
+	 * https://playwright.dev/java/docs/api/class-keyboard
 	 * For more ouse hover in press function F1 - F12, Digit0- Digit9, KeyA- KeyZ,
 	 * Backquote, Minus, Equal, Backslash, Backspace, Tab, Delete, Escape,
 	 * ArrowDown, End, Enter, Home, Insert, PageDown, PageUp, ArrowRight, ArrowUp,
@@ -58,6 +59,8 @@ public class Test_10_KeyboardEvent {
 		Thread.sleep(2000);
 		registerLabel.press("PageDown");
 	}
+	
+	
 
 	@AfterMethod
 	public void teraDown() {

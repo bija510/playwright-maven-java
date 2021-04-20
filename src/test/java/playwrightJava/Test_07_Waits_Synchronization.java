@@ -28,7 +28,7 @@ public class Test_07_Waits_Synchronization {
 		page.navigate("http://demo.automationtesting.in/Loader.html");
 		
 		Thread.sleep(1000);
-		
+		// page.wait + control space give other function
 		page.click("//button[normalize-space()='Run']");
 		// this element take 15-20 sec to be displayed	
 		page.click("//button[normalize-space()='Close']");
