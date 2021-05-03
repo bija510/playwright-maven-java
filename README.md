@@ -1,6 +1,7 @@
 # playwright-maven-java
 
-##Introduction:- This source code will provide this following features.
+## Introduction:
+This source code will provide this following features.
 1. Demo for all the feature of playwright.
 2. playwright **Base class** with before & after method.
 3. **config.properties** file for Environment variable. from where we can do any browser execution like chrome, msedge, chromium, firefox, webkit.
