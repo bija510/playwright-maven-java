@@ -22,7 +22,7 @@ public class Test_02_Selectors {
 			 page.type("//input[@placeholder='First Name']", "Ram");
 			 //2. cssSelector
 			 page.type("input[placeholder='Last Name']", "Lee");
-			 page.pause();
+			// page.pause();
 	     }
 	}
 	
@@ -37,7 +37,7 @@ public class Test_02_Selectors {
 			 //1. Text selector has a few variations: 
 			 //<button id="openwindow" class="btn-style class1" onclick="openWindow()" xpath="1">Open Window</button>
 			 page.click("text=Open Window");
-			 page.pause();
+			 //page.pause();
 	     }
 	}
 }
