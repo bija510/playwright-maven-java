@@ -1,5 +1,7 @@
 package base;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -15,7 +17,6 @@ import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
-import com.microsoft.playwright.options.BrowserChannel;
 
 import utilites.JsonUtils;
 import utilites.Utils;
@@ -42,8 +43,13 @@ public class BaseTest {
 		String browserName = prop.getProperty("Browser");
 		String executionMode = prop.getProperty("ExecutionMode");
 
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int width = (int)screenSize.getWidth();
+		int height = (int)screenSize.getHeight();
+		
 /*=======================================
   To see Browser Execution UserInterface
+  Go to google & type what is my view port?
 =========================================*/
 		if(executionMode.equalsIgnoreCase("UI")) {
 			if(browserName.equalsIgnoreCase("CHROMIUM")) {
@@ -60,14 +66,14 @@ public class BaseTest {
 			}
 			
 			else if(browserName.equalsIgnoreCase("CHROME")) {
-				browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel(BrowserChannel.CHROME));
-				browserContext = browser.newContext();
+				browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel("chrome"));
+				browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(width, height));
 				page = browserContext.newPage();
 				
 			}
 			else if(browserName.equalsIgnoreCase("MSEDGE")) {
-				browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel(BrowserChannel.MSEDGE));
-				browserContext = browser.newContext();
+				browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel("msedge"));
+				browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(width, height));
 				page = browserContext.newPage();
 				
 			}	
@@ -90,13 +96,13 @@ public class BaseTest {
 				page = browser.newPage();
 			}
 			else if(browserName.equalsIgnoreCase("CHROME")) {
-				browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setChannel(BrowserChannel.CHROME));
+				browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome"));
 				browserContext = browser.newContext();
 				page = browserContext.newPage();
 				
 			}
 			else if(browserName.equalsIgnoreCase("MSEDGE")) {
-				browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setChannel(BrowserChannel.MSEDGE));
+				browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setChannel("msedge"));
 				browserContext = browser.newContext();
 				page = browserContext.newPage();
 				
@@ -121,7 +127,9 @@ public class BaseTest {
 	
 	@AfterClass
 	public static void tearDownClass() {
-		page.pause();
-		//page.close();	
+	    page.pause();
+//		browser.close();	
+//		page.close();
+		
 	}	
 }

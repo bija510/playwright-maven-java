@@ -1,8 +1,10 @@
 package playwrightJava;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import org.testng.annotations.Test;
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.BrowserChannel;
 
 /*****************************************************************************************************
 	1. We just Run the first & it automatically download chromium , Webkit, & firefox Browser
@@ -25,20 +27,30 @@ public class Test_01_OpenCloseAll3Browser {
 	  MSEDGE_CANARY
 	 * @throws InterruptedException 
 	 */
+	
+	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	int width = (int)screenSize.getWidth();
+	int height = (int)screenSize.getHeight();
+	
 	@Test
 	public void test_CHROME_real_browser() throws InterruptedException {
-		Browser browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel(BrowserChannel.CHROME));
-		BrowserContext browserContext = browser.newContext();
+		Playwright playwright = Playwright.create();
+		
+		Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(false));
+		BrowserContext browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(width, height));
 		Page page = browserContext.newPage();
 		page.navigate("https://www.rahulshettyacademy.com/AutomationPractice/");
 		Thread.sleep(10000);
+		
+		browser.close();
+		playwright.close();
 	}
 	
 
 	@Test
 	public void test_MSEDGE_real_browser() throws InterruptedException {
-		Browser browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel(BrowserChannel.MSEDGE));
-		BrowserContext browserContext = browser.newContext();
+		Browser browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setChannel("msedge").setHeadless(false));
+		BrowserContext browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(width, height));
 		Page page = browserContext.newPage();
 		page.navigate("https://www.rahulshettyacademy.com/AutomationPractice/");
 		Thread.sleep(10000);
