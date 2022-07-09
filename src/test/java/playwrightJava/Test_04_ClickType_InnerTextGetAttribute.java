@@ -14,7 +14,9 @@ public class Test_04_ClickType_InnerTextGetAttribute {
 			
 			 page.type("//input[@placeholder='First Name']", "Ram");
 			 
-			 page.click("//input[@id='checkbox1']");
+			 page.click("//input[@id='checkbox1']"); // or
+			 //page.locator("//input[@id='checkbox1']").click();
+			 
 			 System.out.println(page.innerText("div[class='container center'] h2"));
 			 
 			 page.pause();
@@ -26,14 +28,15 @@ public class Test_04_ClickType_InnerTextGetAttribute {
 		 try (Playwright playwright = Playwright.create()) {
 			 Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(50));
 			 Page page = browser.newPage();		
-			 page.navigate("https://www.rahulshettyacademy.com/AutomationPractice/");
+			 page.navigate("http://demo.automationtesting.in/Register.html");
 			 
-			 page.type("//input[@id='name']", "David");	
-			 System.out.println(page.evalOnSelector("//input[@id='name']", "el => el.value"));// Work 100%
+			 page.type("//input[@placeholder='First Name']", "David");	
+			 System.out.println(page.evalOnSelector("//input[@placeholder='First Name']", "el => el.value"));// Work 100%
 			 
-			 //System.out.println(page.getAttribute("//input[@id='name']", "value")); //NOT Working 3/20/2021
+			// System.out.println(page.locator("//input[@placeholder='First Name']").getAttribute("ng-model"));  //NOT Working 3/20/2021
+			// System.out.println(page.getAttribute("//input[@placeholder='First Name']", "value")); //NOT Working 3/20/2021
 			 	 		
-			 page.pause();
+			// page.pause();
 
 				}			 
 	      }
