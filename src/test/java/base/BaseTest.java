@@ -127,9 +127,9 @@ public class BaseTest {
 	
 	@AfterClass
 	public static void tearDownClass() {
-	    page.pause();
-//		browser.close();	
-//		page.close();
+//	    page.pause();
+		browser.close();	
+		page.close();
 		
 	}	
 }

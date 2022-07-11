@@ -2,22 +2,16 @@ package playwrightJava;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserContext;
-import com.microsoft.playwright.BrowserType;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
 
-public class Test_08_Asserts {
+import base.BaseTest;
+
+public class Test_08_Asserts extends BaseTest{
 /**********************************************
  * All assertion same in selenium & playwright 
  * since they use same framework TestNG
  **********************************************/
 	@Test()
 	public void test_waits() throws InterruptedException {
-		Browser browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-		BrowserContext browserContext = browser.newContext();
-		Page page = browserContext.newPage();
 		page.navigate("https://www.rahulshettyacademy.com/AutomationPractice/");
 
 		// Example:- 1

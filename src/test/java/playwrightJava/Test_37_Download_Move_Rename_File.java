@@ -3,20 +3,15 @@ package playwrightJava;
 import java.nio.file.Paths;
 
 import org.testng.annotations.Test;
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserContext;
-import com.microsoft.playwright.BrowserType;
+
 import com.microsoft.playwright.Download;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
 
-public class Test_37_Download_Move_Rename_File {
+import base.BaseTest;
 
-	public static void main(String [] args){
-		Browser browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));	
-		BrowserContext browserContext = browser.newContext();			
-		Page page = browserContext.newPage();
-		 
+public class Test_37_Download_Move_Rename_File extends BaseTest{
+
+	@Test
+	public void main(){	
 		page.navigate("https://chromedriver.storage.googleapis.com/index.html?path=104.0.5112.29/");
 		
 		// This will click on the file to download & wait until the download process to end.

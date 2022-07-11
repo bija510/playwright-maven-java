@@ -1,18 +1,16 @@
 package playwrightJava;
 
 import org.testng.annotations.Test;
-import com.microsoft.playwright.*;
+
+import base.BaseTest;
 
 /*******************************************************************************************
  * browserContext.newPage() is More like a light weight version of browser in Incognito mode
  ********************************************************************************************/
-public class Test_06_CheckBox_RadioBtn {
+public class Test_06_CheckBox_RadioBtn extends BaseTest{
 
 	@Test
 	public void test_checkBox() throws InterruptedException {		
-		Browser browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-		BrowserContext browserContext = browser.newContext();
-		Page page = browserContext.newPage();
 		page.navigate("http://demo.automationtesting.in/Register.html");
 		
 		//Check and un check checkBox

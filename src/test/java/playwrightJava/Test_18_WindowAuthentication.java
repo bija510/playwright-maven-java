@@ -16,7 +16,6 @@ public class Test_18_WindowAuthentication extends BaseTest{
 		
 		// This is without credential and it will fail 
 		//page.navigate("http://the-internet.herokuapp.com//basic_auth"); 
-		page.pause();
 		
 	}
 }

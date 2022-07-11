@@ -37,7 +37,6 @@ public class Test_26_JavaScriptAction extends BaseTest{
 		page.navigate("https://www.rahulshettyacademy.com/AutomationPractice/");
 		page.fill("input#autocomplete", "apple");
 		System.out.println(page.evalOnSelector("input#autocomplete", "el => el.value"));
-		page.pause();
 
 	}
 	

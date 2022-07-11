@@ -19,7 +19,7 @@ public class Test_19_Alert extends BaseTest {
 
 	@Test
 	public void acceptAlert_and_printing_alert_text() throws InterruptedException {
-		page.navigate("https://learn.letskodeit.com/p/practice");
+		page.navigate("https://courses.letskodeit.com/practice");
 
 		page.fill("[placeholder='Enter Your Name']", "david");
 		page.onceDialog(dialog -> {
