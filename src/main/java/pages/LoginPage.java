@@ -9,10 +9,10 @@ public class LoginPage {
 		this.page = page;
 	}
 
-	private String userNameTxt_xpath = "//input[@id='txtUsername']";
-	private String passwordtxt_xpath = "//input[@id='txtPassword']";
-	private String loginBtn_xpath = "//input[@id='btnLogin']";
-	private String welcomeMsgLbl_xpath = "//*[@id='welcome']";
+	private String userNameTxt_xpath = "//input[@name='username']";
+	private String passwordtxt_xpath = "//input[@placeholder='Password']";
+	private String loginBtn_xpath = "//button[@type='submit']";
+	private String welcomeMsgLbl_xpath = "//h6[@class='oxd-text oxd-text--h6 oxd-topbar-header-breadcrumb-module']";
 	
 	public void enterUserName(String userName) {
 		page.fill(userNameTxt_xpath, userName);

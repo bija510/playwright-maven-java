@@ -8,7 +8,7 @@ import pages.LoginPage;
 public class Test_01_Login extends BaseTest {
 
 	@Test
-	public void test() throws Exception {
+	public void login() throws Exception {
 		page.navigate(prop.getProperty("Url"));
 		LoginPage loginPage = new LoginPage(page);
 		loginPage.enterUserName(prop.getProperty("UserName"));

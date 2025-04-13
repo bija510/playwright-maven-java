@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import org.testng.ITestResult;
@@ -23,10 +24,12 @@ import utilites.Utils;
 
 public class BaseTest {
 	protected static Browser browser;
+	protected static Playwright playwright;
 	protected static Page page;
 	protected static Properties prop;
 	protected static JsonUtils data;
 	protected static BrowserContext browserContext;
+	protected static ArrayList<String> arguments;
 	
 	@BeforeClass
 	public static void setUp() throws IOException {
@@ -44,7 +47,7 @@ public class BaseTest {
 		String executionMode = prop.getProperty("ExecutionMode");
 
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int width = (int)screenSize.getWidth();
+		int width = (int)screenSize.getWidth()-15;
 		int height = (int)screenSize.getHeight();
 		
 /*=======================================
@@ -52,28 +55,44 @@ public class BaseTest {
   Go to google & type what is my view port?
 =========================================*/
 		if(executionMode.equalsIgnoreCase("UI")) {
-			if(browserName.equalsIgnoreCase("CHROMIUM")) {
-				browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-				page = browser.newPage();
-			}	
-			else if(browserName.equalsIgnoreCase("FIREFOX")) {
-				browser = Playwright.create().firefox().launch(new BrowserType.LaunchOptions().setHeadless(false));
-				page = browser.newPage();
+			
+			if(browserName.equalsIgnoreCase("FIREFOX")) {
+				playwright = Playwright.create();
+				browser = playwright.firefox().launch(new BrowserType.LaunchOptions().setHeadless(false));
+				browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(width, height));
+				page = browserContext.newPage();
 			}
 			else if(browserName.equalsIgnoreCase("WEBKIT")) {
-				browser = Playwright.create().webkit().launch(new BrowserType.LaunchOptions().setHeadless(false));
-				page = browser.newPage();
+				playwright = Playwright.create();
+				browser = playwright.webkit().launch(new BrowserType.LaunchOptions().setHeadless(false));
+				browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(width, height));
+				page = browserContext.newPage();
 			}
 			
+			else if(browserName.equalsIgnoreCase("CHROMIUM")) {
+				playwright = Playwright.create();
+				arguments = new ArrayList<String>();
+				arguments.add("--start-maximized");
+				browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setArgs(arguments));
+				browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(null));
+				page = browserContext.newPage();
+			}	
+			
 			else if(browserName.equalsIgnoreCase("CHROME")) {
-				browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel("chrome"));
-				browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(width, height));
+				playwright = Playwright.create();
+				arguments = new ArrayList<String>();
+				arguments.add("--start-maximized");
+				browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(false).setArgs(arguments));
+				browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(null));
 				page = browserContext.newPage();
 				
 			}
 			else if(browserName.equalsIgnoreCase("MSEDGE")) {
-				browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel("msedge"));
-				browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(width, height));
+				playwright = Playwright.create();
+				arguments = new ArrayList<String>();
+				arguments.add("--start-maximized");
+				browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setChannel("msedge").setHeadless(false).setArgs(arguments));
+				browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(null));
 				page = browserContext.newPage();
 				
 			}	
@@ -84,7 +103,8 @@ public class BaseTest {
 ================================*/
 		if(executionMode.equalsIgnoreCase("HEADLESS")) {
 			if(browserName.equalsIgnoreCase("CHROMIUM")) {
-				browser = Playwright.create().chromium().launch();
+				Playwright playwright = Playwright.create();
+				browser = playwright.chromium().launch();
 				page = browser.newPage();
 			}	
 			else if(browserName.equalsIgnoreCase("FIREFOX")) {
@@ -96,8 +116,9 @@ public class BaseTest {
 				page = browser.newPage();
 			}
 			else if(browserName.equalsIgnoreCase("CHROME")) {
+				playwright = Playwright.create();
 				browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome"));
-				browserContext = browser.newContext();
+				browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(1366, 768));
 				page = browserContext.newPage();
 				
 			}

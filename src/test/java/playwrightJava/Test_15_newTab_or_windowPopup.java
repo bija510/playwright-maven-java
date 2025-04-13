@@ -61,6 +61,20 @@ public class Test_15_newTab_or_windowPopup extends BaseTest{
 	}
 	
 	@Test
+	public void switchTonewTab() throws InterruptedException {
+		page.navigate("https://www.rahulshettyacademy.com/AutomationPractice/");
+		Thread.sleep(2000);
+		page.click("//a[normalize-space()='Open Tab']");
+		
+		ElementHandle homeTabNameText = page.querySelector("//div[@class='nav-outer clearfix']//a[normalize-space()='Home']");
+		System.out.println(homeTabNameText.innerText());
+		
+		Thread.sleep(2000);
+		page.goBack();
+		
+	}
+	
+	@Test
 	public void test_byRemoving_targetAttribute_and_click() throws InterruptedException { //WIP
 		page.navigate("https://www.rahulshettyacademy.com/AutomationPractice/");	
 
