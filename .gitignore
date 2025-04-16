@@ -1,6 +1,6 @@
 *.png
 /target/
-/test-output/*
+#/test-output/*
 debug.log*
 allure-results
 /Cookies.data
