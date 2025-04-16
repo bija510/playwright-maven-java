@@ -30,3 +30,12 @@ This source code will provide this following features.
   <parameter name="testng.metrics.report.appendTimestamp" value = "True"/>
   
 ```
+
+## Allure report automatically generate after mvn run or testng.xml file run
+```
+Go to the project directory and run this command
+eclipse-workspace-new\testmvn_project> 
+```
+> allure serve allure-results
+
+

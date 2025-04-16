@@ -2,6 +2,5 @@
 /target/
 /test-output/*
 debug.log*
-/.classpath
-/.project
-/videos/*
+allure-results
+/Cookies.data
